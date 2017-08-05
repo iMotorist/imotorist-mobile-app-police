@@ -38,6 +38,7 @@
             app:met_baseColor="#f9f8f1"
             app:met_errorColor="#f44336"
             android:maxLength="6"
+            android:inputType="phone"
             app:met_singleLineEllipsis="true"
             app:met_minCharacters="0"
             app:met_maxCharacters="6"
@@ -76,9 +77,17 @@
             android:onClick=""
             android:textColor="@android:color/white"
             fbutton:buttonColor="@color/fbutton_color_turquoise"
-            fbutton:shadowEnabled="false" />
+            fbutton:shadowEnabled="true" />
 
+        <net.bohush.geometricprogressview.GeometricProgressView
+            android:id="@+id/progressView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="50dp"
+            app:gp_figure_padding="2dp"
 
+            app:gp_number_of_angles="15" />
     </LinearLayout>
 
 
