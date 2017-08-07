@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Imotorist Officer</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="menu_1">Add Offence</string>
+    <string name="menu_2">Offence History</string>
+    <string name="menu_3">View Map</string>
+    <string name="menu_4">My Profile</string>
+    <string name="menu_5">Logout</string>
+
+
 </resources>

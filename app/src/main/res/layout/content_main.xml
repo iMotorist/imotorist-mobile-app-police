@@ -16,14 +16,7 @@
         android:orientation="vertical"
         android:weightSum="1">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="center_horizontal"
-            fbutton:srcCompat="@drawable/title"
-            android:layout_weight="0.08" />
+
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/empno"
@@ -74,10 +67,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
             android:text="Login"
-            android:onClick=""
+            android:onClick="goHome"
             android:textColor="@android:color/white"
             fbutton:buttonColor="@color/fbutton_color_turquoise"
-            fbutton:shadowEnabled="true" />
+            fbutton:shadowEnabled="false" />
 
         <net.bohush.geometricprogressview.GeometricProgressView
             android:id="@+id/progressView"
@@ -86,8 +79,17 @@
             android:layout_gravity="center"
             android:layout_margin="50dp"
             app:gp_figure_padding="2dp"
-
+            android:visibility="invisible"
             app:gp_number_of_angles="15" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="185dp"
+            android:layout_height="55dp"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_horizontal"
+            fbutton:srcCompat="@drawable/title"
+            android:layout_weight="0.22" />
     </LinearLayout>
 
 

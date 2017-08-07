@@ -1,15 +1,12 @@
 package com.madushanka.imotoristofficer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,18 +28,18 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().hide();
 
-      //  mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
 
-   /*     mAuth.signInAnonymously()
+       mAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
                             Log.d("app", "signInAnonymously:success");
-                       //     FirebaseUser user = mAuth.getCurrentUser();
-                           // Toast.makeText(MainActivity.this, user.getUid(), Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(MainActivity.this, user.getUid(), Toast.LENGTH_SHORT).show();
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -53,19 +50,21 @@ public class MainActivity extends AppCompatActivity {
 
 
                     }
-                });*/
+                });
 
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-      //  FirebaseAuth.getInstance().signOut();
-
 
     }
 
 
+    public  void goHome(View v){
+        Intent i = new Intent(MainActivity.this,HomeActivity.class);
+        startActivity(i);
 
+    }
 
 }
