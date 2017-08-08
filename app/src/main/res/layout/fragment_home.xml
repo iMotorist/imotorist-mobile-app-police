@@ -1,0 +1,81 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_register"
+    tools:context="com.madushanka.imotoristofficer.HomeFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:gravity="top"
+        android:alpha="0.9"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/primary_button1"
+            android:layout_width="234dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:text="Add Offence"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/primary_button2"
+            android:layout_width="234dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:text="Offence History"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/primary_button3"
+            android:layout_width="234dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:text="View Map"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/primary_button4"
+            android:layout_width="234dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:text="My Profile"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="185dp"
+            android:layout_height="55dp"
+            android:layout_margin="55dp"
+            android:layout_gravity="center_horizontal"
+            fbutton:srcCompat="@drawable/title"
+            android:layout_weight="0.22" />
+    </LinearLayout>
+
+
+
+</FrameLayout>

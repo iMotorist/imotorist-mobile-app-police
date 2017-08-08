@@ -39,6 +39,10 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DashBoardActivity"
+            android:label="@string/title_activity_dash_board"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
