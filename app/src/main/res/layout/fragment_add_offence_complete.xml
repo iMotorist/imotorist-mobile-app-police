@@ -1,0 +1,98 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_register"
+    tools:context="com.madushanka.imotoristofficer.AddOffenceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:alpha="0.9"
+        android:background="@android:color/transparent"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+
+        <AutoCompleteTextView
+            android:id="@+id/autocompleteEditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif"
+            android:ems="10"
+            android:text=""
+            android:textSize="15sp"
+            android:singleLine="true"
+            android:hint="Select offence to add"
+            android:backgroundTint="#008e79"
+            android:textColorHint="@color/hint"
+            android:textColor="@android:color/white"/>
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/add_offence"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="30dp"
+            android:text="Add"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+        <TextView
+            android:id="@+id/offence_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.30"
+            android:text=""
+            android:textColor="@android:color/white" />
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/offence_clear"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:text="Clear offence list"
+            android:visibility="gone"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/add_offence_submit"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:text="Submit"
+            android:visibility="gone"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+
+        <net.bohush.geometricprogressview.GeometricProgressView
+            android:id="@+id/progressView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            app:gp_figure_padding="2dp"
+            app:gp_number_of_angles="15" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

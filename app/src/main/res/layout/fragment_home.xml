@@ -70,7 +70,7 @@
             android:id="@+id/imageView"
             android:layout_width="185dp"
             android:layout_height="55dp"
-            android:layout_margin="55dp"
+            android:layout_margin="50dp"
             android:layout_gravity="center_horizontal"
             fbutton:srcCompat="@drawable/title"
             android:layout_weight="0.22" />

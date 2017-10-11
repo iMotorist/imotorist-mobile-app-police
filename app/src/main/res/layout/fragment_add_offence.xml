@@ -2,13 +2,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_register"
     tools:context="com.madushanka.imotoristofficer.AddOffenceFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Test Offence" />
+        android:layout_margin="15dp"
+        android:alpha="0.9"
+        android:background="@android:color/transparent"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/dlnumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif"
+            android:hint="Driving Licence Number"
+            android:inputType="text"
+            android:maxLength="8"
+            app:met_baseColor="#f9f8f1"
+            app:met_errorColor="#f44336"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="Driving Licence Number  "
+            app:met_maxCharacters="8"
+            app:met_minCharacters="0"
+            app:met_primaryColor="#008e79"
+            app:met_singleLineEllipsis="true"
+            app:met_textColorHint="@color/hint" />
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/vehicle_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif"
+            android:hint="Vehicle Number"
+            android:inputType="textNoSuggestions"
+            android:maxLength="8"
+            app:met_baseColor="#f9f8f1"
+            app:met_errorColor="#f44336"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelText="Vehicle Number  "
+            app:met_maxCharacters="8"
+            app:met_minCharacters="0"
+            app:met_primaryColor="#008e79"
+            app:met_singleLineEllipsis="true"
+            app:met_textColorHint="@color/hint" />
+
+
+
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/add_offence_validate"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:text="Validate"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+        <net.bohush.geometricprogressview.GeometricProgressView
+            android:id="@+id/progressView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            app:gp_figure_padding="2dp"
+            app:gp_number_of_angles="15" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.30"
+            android:text="Full Name : Gamini Perera\n\nNIC No : 912361756v\n\nDOB : 1991-08-25"
+            android:textColor="@android:color/white" />
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/add_offence_confirm"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:text="Confirm"
+            android:textColor="@android:color/white"
+            fbutton:buttonColor="@color/fbutton_color_turquoise"
+            fbutton:shadowEnabled="false" />
+
+    </LinearLayout>
+
 
 </FrameLayout>
