@@ -1,56 +1,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity">
-
-<com.google.android.gms.maps.MapView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/mapView" />
+    android:background="@color/bg_register"
+    android:clickable="true"
+    tools:context=".DashBoardActivity">
 
-
-
-    <LinearLayout
+    <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/book"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:background="@android:color/background_dark"
-                android:orientation="horizontal"
-                android:onClick="startRide"
-                android:visibility="gone"
-                android:text="START RIDE"
-                android:textSize="20dp" />
-
-            <Button
-                android:id="@+id/book_confirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:background="@android:color/background_dark"
-                android:orientation="horizontal"
-                android:onClick="viewBookingInfo"
-                android:visibility="gone"
-                android:text="Get Booking Info"
-                android:textSize="20dp" />
-
-
-
-        </LinearLayout>
-
-    </LinearLayout>
 </FrameLayout>

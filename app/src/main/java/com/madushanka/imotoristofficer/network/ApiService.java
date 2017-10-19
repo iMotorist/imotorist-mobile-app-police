@@ -5,7 +5,12 @@ package com.madushanka.imotoristofficer.network;
 
 
 import com.madushanka.imotoristofficer.entities.AccessToken;
+import com.madushanka.imotoristofficer.entities.Motorist;
+import com.madushanka.imotoristofficer.entities.Offence;
 import com.madushanka.imotoristofficer.entities.User;
+
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -26,8 +31,16 @@ public interface ApiService {
     @POST("logout")
     Call<AccessToken> logout();
 
-    @GET("user")
+    @GET("logged-in-user")
     Call<User> user();
+
+
+    @GET("offences")
+    Call<List<Offence>> offences();
+
+    @POST("get-user")
+    @FormUrlEncoded
+    Call<Motorist> motorist(@Field("license_no") String license_no);
 
     @POST("refresh")
     @FormUrlEncoded

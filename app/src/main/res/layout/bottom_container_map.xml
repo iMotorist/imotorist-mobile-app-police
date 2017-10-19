@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:gravity="center|bottom"
+    android:orientation="horizontal">
+
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/add_offence_finish"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:text="Finish"
+        android:textColor="@android:color/white"
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowEnabled="false" />
+
+</LinearLayout>

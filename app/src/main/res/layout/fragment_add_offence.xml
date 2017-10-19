@@ -5,7 +5,8 @@
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_register"
-    tools:context="com.madushanka.imotoristofficer.AddOffenceFragment">
+    android:clickable="true"
+    tools:context="com.madushanka.imotoristofficer.DashBoardActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,13 +27,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif"
-            android:hint="Driving Licence Number"
+            android:hint="Driving License Number"
             android:inputType="text"
             android:maxLength="8"
             app:met_baseColor="#f9f8f1"
             app:met_errorColor="#f44336"
             app:met_floatingLabel="highlight"
-            app:met_floatingLabelText="Driving Licence Number  "
+            app:met_floatingLabelText="Driving License Number  "
             app:met_maxCharacters="8"
             app:met_minCharacters="0"
             app:met_primaryColor="#008e79"
@@ -62,8 +63,6 @@
             app:met_textColorHint="@color/hint" />
 
 
-
-
         <info.hoang8f.widget.FButton
             android:id="@+id/add_offence_validate"
             android:layout_width="194dp"
@@ -77,31 +76,32 @@
 
         <net.bohush.geometricprogressview.GeometricProgressView
             android:id="@+id/progressView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="51dp"
+            android:layout_height="42dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:visibility="gone"
+            android:layout_margin="60dp"
             app:gp_figure_padding="2dp"
+            android:visibility="gone"
             app:gp_number_of_angles="15" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/motorist_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="0.30"
-            android:text="Full Name : Gamini Perera\n\nNIC No : 912361756v\n\nDOB : 1991-08-25"
+            android:text=""
             android:textColor="@android:color/white" />
 
         <info.hoang8f.widget.FButton
-            android:id="@+id/add_offence_confirm"
+            android:id="@+id/add_offence_next"
             android:layout_width="194dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
-            android:text="Confirm"
+            android:text="Next"
+            android:visibility="gone"
             android:textColor="@android:color/white"
             fbutton:buttonColor="@color/fbutton_color_turquoise"
             fbutton:shadowEnabled="false" />

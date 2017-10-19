@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_register"
+    android:clickable="true"
+    tools:context=".DashBoardActivity">
+
+    <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map_offence"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal">
+
+
+            <include
+                android:id="@+id/bottom_container_map"
+                android:layout_margin="5dp"
+                layout="@layout/bottom_container_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

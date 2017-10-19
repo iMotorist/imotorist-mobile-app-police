@@ -26,7 +26,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             app:met_floatingLabel="highlight"
-            app:met_floatingLabelText="Enter Employee Number here "
+            app:met_floatingLabelText="Enter email or phone here "
             app:met_primaryColor="#008e79"
             app:met_baseColor="#f9f8f1"
             app:met_errorColor="#f44336"
@@ -37,7 +37,7 @@
             app:met_maxCharacters="20"
             android:fontFamily="sans-serif"
             app:met_textColorHint="@color/hint"
-            android:hint="Employee Number"/>
+            android:hint="Email or Phone"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/password"
@@ -61,7 +61,7 @@
 
 
         <info.hoang8f.widget.FButton
-            android:id="@+id/primary_button"
+            android:id="@+id/login"
             android:layout_width="194dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -74,10 +74,10 @@
 
         <net.bohush.geometricprogressview.GeometricProgressView
             android:id="@+id/progressView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="51dp"
+            android:layout_height="42dp"
             android:layout_gravity="center"
-            android:layout_margin="50dp"
+            android:layout_margin="60dp"
             app:gp_figure_padding="2dp"
             android:visibility="invisible"
             app:gp_number_of_angles="15" />

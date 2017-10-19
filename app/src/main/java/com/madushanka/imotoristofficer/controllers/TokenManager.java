@@ -1,4 +1,4 @@
-package com.madushanka.imotoristofficer;
+package com.madushanka.imotoristofficer.controllers;
 
 import android.content.SharedPreferences;
 
@@ -16,7 +16,7 @@ public class TokenManager {
         this.editor = prefs.edit();
     }
 
-    static synchronized TokenManager getInstance(SharedPreferences prefs) {
+    public static synchronized TokenManager getInstance(SharedPreferences prefs) {
         if (INSTANCE == null) {
             INSTANCE = new TokenManager(prefs);
         }

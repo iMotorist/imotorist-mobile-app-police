@@ -1,40 +1,50 @@
 package com.madushanka.imotoristofficer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.provider.Settings;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.madushanka.imotoristofficer.controllers.LoginManager;
+import com.madushanka.imotoristofficer.controllers.TokenManager;
+import com.madushanka.imotoristofficer.controllers.UserManager;
 import com.madushanka.imotoristofficer.entities.AccessToken;
 import com.madushanka.imotoristofficer.entities.ApiError;
+import com.madushanka.imotoristofficer.entities.Motorist;
+import com.madushanka.imotoristofficer.entities.Offence;
 import com.madushanka.imotoristofficer.entities.User;
 import com.madushanka.imotoristofficer.network.ApiService;
 import com.madushanka.imotoristofficer.network.RetrofitBuilder;
 
 import net.bohush.geometricprogressview.GeometricProgressView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import pugman.com.simplelocationgetter.SimpleLocationGetter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.alexbykov.nopermission.PermissionHelper;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SimpleLocationGetter.OnLocationGetListener {
 
     private static final String TAG = "DashBoardActivity";
 
@@ -49,6 +59,10 @@ public class DashBoardActivity extends AppCompatActivity
     LoginManager loginManager;
     GeometricProgressView progressView;
     ApiService authService;
+    public static Location mLocation;
+    public static SimpleLocationGetter locationGetter;
+    public static Motorist m = new Motorist();
+    private PermissionHelper permissionHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,21 +94,36 @@ public class DashBoardActivity extends AppCompatActivity
 
         fragment = new HomeFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         ft.replace(R.id.main_view, fragment);
         ft.addToBackStack("home");
         ft.commit();
 
         getUser();
+
+        locationGetter = new SimpleLocationGetter(this, this);
+        locationGetter.getLastLocation();
+
+
+
     }
 
     @Override
     public void onBackPressed() {
+
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count ==0) {
             super.onBackPressed();
 
         } else {
+
+            final Fragment fragment=getSupportFragmentManager().findFragmentByTag("home");
+
+            if(fragment != null && fragment.isVisible()){
+                super.onBackPressed();
+            }
+
             getFragmentManager().popBackStack();
 
         }
@@ -127,7 +156,12 @@ public class DashBoardActivity extends AppCompatActivity
         } else if (id == R.id.nav_notifications) {
 
         } else if (id == R.id.nav_map) {
-
+            if(CheckEnableGPS()) {
+                getLocation();
+                fragment = new MapFragment();
+                s = "map";
+                getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
         }else if (id == R.id.nav_profile) {
 
         }else if (id == R.id.nav_about) {
@@ -139,7 +173,7 @@ public class DashBoardActivity extends AppCompatActivity
 
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.main_view, fragment);
+            ft.replace(R.id.main_view, fragment,s);
             ft.addToBackStack(s);
             ft.commit();
         }
@@ -263,4 +297,71 @@ public class DashBoardActivity extends AppCompatActivity
 
 
     }
+
+    @Override
+    public void onLocationReady(Location location){
+        Log.d("LOCATION", "onLocationReady: lat="+location.getLatitude() + " lon="+location.getLongitude());
+       // Toast.makeText(DashBoardActivity.this,"lat="+location.getLatitude() + " lon="+location.getLongitude()+"Address : "+getCompleteAddressString(location), Toast.LENGTH_LONG).show();
+        mLocation = location;
+    }
+
+    @Override
+    public void onError(String error){
+        Log.e("LOCATION", "Error: "+error);
+
+
+    }
+
+    public static void getLocation(){
+
+        locationGetter.getLastLocation();
+
+    }
+
+
+    private boolean CheckEnableGPS(){
+
+        boolean res = false;
+        String provider = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        if(!provider.equals(""))
+
+            res =   true;
+
+        else{
+
+            showDialogGPS();
+
+        }
+
+        return res;
+    }
+
+    public void showDialogGPS(){
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("GPS is not enable. Enable GPS ?");
+        alertDialogBuilder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                        getLocation();
+                        // finish();
+                    }
+                });
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // getActivity().finish();
+
+            }
+        });
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
 }

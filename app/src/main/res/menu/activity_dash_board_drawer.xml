@@ -9,11 +9,11 @@
         <item
             android:id="@+id/nav_add_offence"
             android:icon="@drawable/ic_traffic_light"
-            android:title="Add Offence" />
+            android:title="Issue Ticket" />
         <item
             android:id="@+id/nav_offence_history"
             android:icon="@drawable/ic_history"
-            android:title="Offence History" />
+            android:title="Issue History" />
 
         <item
             android:id="@+id/nav_notifications"

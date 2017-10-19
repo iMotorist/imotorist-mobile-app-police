@@ -7,11 +7,14 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -32,28 +35,30 @@ import java.util.Locale;
  * Created by madushanka on 4/15/17.
  */
 
-public class MapFragment extends android.support.v4.app.Fragment implements OnMapReadyCallback {
+public class MapFragment_Offfence extends android.support.v4.app.Fragment implements OnMapReadyCallback {
 
     public static MapView map;
     public static Location myLocation;
     public static GoogleMap mMap;
     public boolean flag = true;
 
-
+    public static  String Address;
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
-    AddressLocater al;
+    Button finsh_button;
     Location locationCt;
+    String address;
+    AddressLocater al;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.mapview, container, false);
-        map = (MapView) v.findViewById(R.id.mapView);
+        View v = inflater.inflate(R.layout.mapview_offence, container, false);
+        map = (MapView) v.findViewById(R.id.map_offence);
         map.onCreate(savedInstanceState);
 
         map.getMapAsync(this);
@@ -74,6 +79,23 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
 
         rlp1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
         rlp1.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+
+        finsh_button = (Button) v.findViewById(R.id.add_offence_finish);
+
+        finsh_button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+              //  Toast.makeText(getActivity().getApplicationContext(),"Finish ",Toast.LENGTH_LONG).show();
+
+                Fragment fragment = new AddOffenceCompleteFragment();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.main_view, fragment,"add_offence_3");
+                ft.addToBackStack("add_offence_3");
+                ft.commit();
+            }
+        });
 
         return v;
     }
@@ -132,12 +154,9 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
                     mMap.clear();
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                     mMap.addMarker(markerOptions);
-                    //getCompleteAddressString(latLng.latitude,latLng.longitude);
-
-                    al = new AddressLocater(getActivity(),latLng.latitude,latLng.longitude,false);
+                    al = new AddressLocater(getActivity(),latLng.latitude,latLng.longitude,true);
                     al.execute();
-
-
+                    DashBoardActivity.m.setLocation(address);
                 }
             });
 
@@ -146,22 +165,46 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
                 CameraUpdate l = CameraUpdateFactory.newLatLngZoom(
                         latLng, 15);
                 mMap.animateCamera(l);
-                al = new AddressLocater(getActivity(),DashBoardActivity.mLocation.getLatitude(),DashBoardActivity.mLocation.getLongitude(),false);
+                al = new AddressLocater(getActivity(),DashBoardActivity.mLocation.getLatitude(),DashBoardActivity.mLocation.getLongitude(),true);
                 al.execute();
-            }else{
-                DashBoardActivity.getLocation();
+                DashBoardActivity.m.setLocation(address);
 
-            }
-
+            }else{ DashBoardActivity.getLocation();}
 
         }
         catch (SecurityException e){
 
             Toast.makeText(getActivity().getApplicationContext(),"No Permission for GPS ",Toast.LENGTH_LONG).show();
             DashBoardActivity.getLocation();
+            showDialogGPS();
         }
     }
 
 
+    public void showDialogGPS(){
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setMessage("GPS Location is not enable. Enable GPS ? ");
+        alertDialogBuilder.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                       // finish();
+                    }
+                });
+        alertDialogBuilder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               // getActivity().finish();
+
+            }
+        });
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 }
 

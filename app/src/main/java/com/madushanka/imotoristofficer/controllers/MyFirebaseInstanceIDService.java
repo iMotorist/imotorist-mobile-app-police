@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.madushanka.imotoristofficer;
+package com.madushanka.imotoristofficer.controllers;
 
 import android.util.Log;
 import android.widget.Toast;

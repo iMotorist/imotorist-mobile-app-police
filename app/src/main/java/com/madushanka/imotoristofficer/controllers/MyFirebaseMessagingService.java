@@ -1,6 +1,6 @@
 
 
-package com.madushanka.imotoristofficer;
+package com.madushanka.imotoristofficer.controllers;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,6 +13,8 @@ import android.util.Log;
 
 
 import com.google.firebase.messaging.RemoteMessage;
+import com.madushanka.imotoristofficer.MainActivity;
+import com.madushanka.imotoristofficer.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
@@ -36,7 +38,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher_icon)
                 .setContentTitle("Firebase Push Notification")
                 .setContentText(messageBody)
                 .setAutoCancel(true)

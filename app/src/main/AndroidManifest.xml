@@ -3,17 +3,22 @@
     package="com.madushanka.imotoristofficer">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
-    -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <permission-group
+        android:name="android.permission-group.LOCATION"
+        android:label="GPS"
+        android:description="@string/app_name" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/police_launcher"
+        android:icon="@mipmap/police"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -30,14 +35,14 @@
         </activity>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name=".controllers.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".controllers.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -47,6 +52,7 @@
             android:name=".DashBoardActivity"
             android:label="@string/title_activity_dash_board"
             android:theme="@style/AppTheme.NoActionBar" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

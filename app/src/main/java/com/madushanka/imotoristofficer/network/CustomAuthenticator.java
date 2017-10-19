@@ -3,7 +3,7 @@ package com.madushanka.imotoristofficer.network;
 import android.support.annotation.Nullable;
 
 
-import com.madushanka.imotoristofficer.TokenManager;
+import com.madushanka.imotoristofficer.controllers.TokenManager;
 import com.madushanka.imotoristofficer.entities.AccessToken;
 
 
