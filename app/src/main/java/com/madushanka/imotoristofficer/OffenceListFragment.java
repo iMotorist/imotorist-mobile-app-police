@@ -57,6 +57,8 @@ public class OffenceListFragment extends Fragment implements  SimpleLocationGett
     ApiService authService;
     GeometricProgressView progressView;
     TextView title;
+    SparseBooleanArray mSelectedItemsIds;
+
     private static final String TAG = "Pick_Offence_fragment";
 
     String[] Offence_list = { "Not attempting to avoid an accident",
@@ -84,7 +86,7 @@ public class OffenceListFragment extends Fragment implements  SimpleLocationGett
     };
 
     public OffenceListFragment() {
-
+        mSelectedItemsIds = new SparseBooleanArray();
 
     }
 
@@ -104,6 +106,9 @@ public class OffenceListFragment extends Fragment implements  SimpleLocationGett
         progressView = (GeometricProgressView) v.findViewById(R.id.progressView);
         title = (TextView)v.findViewById(R.id.offence_list_title);
         getOffences(v);
+
+
+
         return v;
 
     }
@@ -115,13 +120,14 @@ public class OffenceListFragment extends Fragment implements  SimpleLocationGett
     }
 
     private void populateRecyclerView(View view,List<Offence> list) {
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(linearLayoutManager);
         arrayList = list;
         list_offence = new ArrayList<Offence>();
-        adapter = new RecyclerViewAdapter(context,list);
+        adapter = new RecyclerViewAdapter(context,list,mSelectedItemsIds);
         recyclerView.setAdapter(adapter);
 
 
@@ -132,12 +138,14 @@ public class OffenceListFragment extends Fragment implements  SimpleLocationGett
             @Override
             public void onClick(View view) {
                 SparseBooleanArray selectedRows = adapter.getSelectedIds();
+                mSelectedItemsIds = selectedRows;
                 if (selectedRows.size() > 0) {
 
                     for (int i = 0; i < selectedRows.size(); i++) {
                         if (selectedRows.valueAt(i)) {
                             Offence selectedOffence = arrayList.get(selectedRows.keyAt(i));
                             list_offence.add(selectedOffence);
+
                         }
                     }
                    // Toast.makeText(context, "Selected Rows\n" + stringBuilder.toString(), Toast.LENGTH_SHORT).show();
