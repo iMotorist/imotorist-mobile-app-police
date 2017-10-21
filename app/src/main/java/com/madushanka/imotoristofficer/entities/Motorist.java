@@ -20,7 +20,7 @@ public class Motorist {
     String location;
     String location_lat;
     String location_lon;
-
+    String remark;
 
     public String getId() {
         return id;
@@ -116,5 +116,13 @@ public class Motorist {
 
     public void setLocation_lon(String location_lon) {
         this.location_lon = location_lon;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

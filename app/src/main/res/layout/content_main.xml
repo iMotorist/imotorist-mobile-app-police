@@ -30,11 +30,11 @@
             app:met_primaryColor="#008e79"
             app:met_baseColor="#f9f8f1"
             app:met_errorColor="#f44336"
-            android:maxLength="20"
+            android:maxLength="100"
             android:inputType="text"
             app:met_singleLineEllipsis="true"
             app:met_minCharacters="0"
-            app:met_maxCharacters="20"
+            app:met_maxCharacters="100"
             android:fontFamily="sans-serif"
             app:met_textColorHint="@color/hint"
             android:hint="Email or Phone"/>

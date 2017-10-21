@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.madushanka.imotoristofficer.entities.Motorist;
+
 
 public class HomeFragment extends android.support.v4.app.Fragment {
 
@@ -34,6 +36,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v)
             {
+                DashBoardActivity.m = new Motorist();
                 Fragment  fragment = new AddOffenceFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 getActivity().getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

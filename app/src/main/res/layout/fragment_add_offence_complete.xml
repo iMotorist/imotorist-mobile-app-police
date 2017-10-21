@@ -57,7 +57,7 @@
                 fbutton:shadowEnabled="false" />
 
             <info.hoang8f.widget.FButton
-                android:id="@+id/add__remark"
+                android:id="@+id/add_remark"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

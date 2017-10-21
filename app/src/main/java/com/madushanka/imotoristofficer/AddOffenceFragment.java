@@ -84,7 +84,7 @@ public class AddOffenceFragment extends android.support.v4.app.Fragment {
             {
 
 
-                Fragment  fragment = new RecyclerViewFragment();
+                Fragment  fragment = new OffenceListFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.main_view, fragment,"add_offence_2");
                 ft.addToBackStack("add_offence_2");

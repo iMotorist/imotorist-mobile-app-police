@@ -63,6 +63,8 @@ public class AddressLocater extends AsyncTask<String, String, String> {
         Toast.makeText(c, "Address : "+address, Toast.LENGTH_LONG).show();
         if(flag){
             DashBoardActivity.m.setLocation(address);
+            DashBoardActivity.m.setLocation_lat(lat+"");
+            DashBoardActivity.m.setLocation_lon(lon+"");
         }
     }
 

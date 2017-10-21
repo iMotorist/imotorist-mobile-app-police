@@ -21,16 +21,30 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.madushanka.imotoristofficer.DashBoardActivity;
+import com.madushanka.imotoristofficer.Utils;
+import com.madushanka.imotoristofficer.entities.ApiError;
+import com.madushanka.imotoristofficer.network.ApiService;
+import com.madushanka.imotoristofficer.network.RetrofitBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirebaseIIDService";
+    Call<String> firebase_call;
+    ApiService authService;
+    TokenManager tokenManager;
 
 
     @Override
     public void onTokenRefresh() {
 
+        tokenManager = TokenManager.getInstance(getSharedPreferences("prefs", MODE_PRIVATE));
+        authService = RetrofitBuilder.createServiceWithAuth(ApiService.class, tokenManager);
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.e(TAG, "Refreshed token: " + refreshedToken);
 
@@ -39,6 +53,51 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
 
     private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
+          updateFirebase(token);
+    }
+
+
+
+    void updateFirebase(String token) {
+
+
+        firebase_call = authService.firebase(token);
+
+
+        firebase_call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> firebase_call, Response<String> response) {
+
+                Log.w(TAG, "onResponse: " + response);
+
+                if (response.isSuccessful()) {
+
+                    //Toast.makeText(getApplicationContext(),"Saved", Toast.LENGTH_LONG).show();
+
+                } else {
+                    if (response.code() == 422) {
+
+
+                      //  Toast.makeText(getApplicationContext(), "Invalid", Toast.LENGTH_LONG).show();
+
+                    }
+                    if (response.code() == 401) {
+                        ApiError apiError = Utils.convertErrors(response.errorBody());
+
+                       // Toast.makeText(getApplicationContext(), apiError.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String>  firebase_call, Throwable t) {
+                Log.w(TAG, "onFailure: " + t.getMessage());
+
+            }
+        });
+
+
     }
 }

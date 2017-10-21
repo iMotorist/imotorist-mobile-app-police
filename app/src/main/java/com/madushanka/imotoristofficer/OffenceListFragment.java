@@ -46,7 +46,7 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class RecyclerViewFragment extends Fragment implements  SimpleLocationGetter.OnLocationGetListener{
+public class OffenceListFragment extends Fragment implements  SimpleLocationGetter.OnLocationGetListener{
 
     private Context context;
     private RecyclerViewAdapter adapter;
@@ -83,7 +83,7 @@ public class RecyclerViewFragment extends Fragment implements  SimpleLocationGet
             "Driving while using mobile phones"
     };
 
-    public RecyclerViewFragment() {
+    public OffenceListFragment() {
 
 
     }
@@ -234,7 +234,7 @@ public class RecyclerViewFragment extends Fragment implements  SimpleLocationGet
                         return text.matches("\\w+");
                     }
                 })
-                .setConfirmButton("Finish", new LovelyTextInputDialog.OnTextInputConfirmListener() {
+                .setConfirmButton("FINISH", new LovelyTextInputDialog.OnTextInputConfirmListener() {
                     @Override
                     public void onTextInputConfirmed(String text) {
                       //  Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();

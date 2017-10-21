@@ -24,6 +24,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.madushanka.imotoristofficer.network.AddressLocater;
@@ -168,6 +169,8 @@ public class MapFragment_Offfence extends android.support.v4.app.Fragment implem
                 al = new AddressLocater(getActivity(),DashBoardActivity.mLocation.getLatitude(),DashBoardActivity.mLocation.getLongitude(),true);
                 al.execute();
                 DashBoardActivity.m.setLocation(address);
+                DashBoardActivity.m.setLocation_lat(DashBoardActivity.mLocation.getLatitude()+"");
+                DashBoardActivity.m.setLocation_lon(DashBoardActivity.mLocation.getLongitude()+"");
 
             }else{ DashBoardActivity.getLocation();}
 

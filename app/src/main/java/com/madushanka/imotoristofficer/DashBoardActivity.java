@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,29 +20,26 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.madushanka.imotoristofficer.controllers.LoginManager;
 import com.madushanka.imotoristofficer.controllers.TokenManager;
 import com.madushanka.imotoristofficer.controllers.UserManager;
 import com.madushanka.imotoristofficer.entities.AccessToken;
 import com.madushanka.imotoristofficer.entities.ApiError;
 import com.madushanka.imotoristofficer.entities.Motorist;
-import com.madushanka.imotoristofficer.entities.Offence;
 import com.madushanka.imotoristofficer.entities.User;
 import com.madushanka.imotoristofficer.network.ApiService;
 import com.madushanka.imotoristofficer.network.RetrofitBuilder;
-
 import net.bohush.geometricprogressview.GeometricProgressView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import pugman.com.simplelocationgetter.SimpleLocationGetter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.alexbykov.nopermission.PermissionHelper;
 
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SimpleLocationGetter.OnLocationGetListener {
@@ -55,14 +53,14 @@ public class DashBoardActivity extends AppCompatActivity
     Call<AccessToken> call;
     Call<User> user_call;
     ApiService service;
-    Call<String> call1;
+    Call<String> firebase_call;
     LoginManager loginManager;
     GeometricProgressView progressView;
     ApiService authService;
     public static Location mLocation;
     public static SimpleLocationGetter locationGetter;
-    public static Motorist m = new Motorist();
-    private PermissionHelper permissionHelper;
+    public static Motorist m ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +71,8 @@ public class DashBoardActivity extends AppCompatActivity
 
 
         mAuth = FirebaseAuth.getInstance();
+        loginFirebase();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -150,6 +150,7 @@ public class DashBoardActivity extends AppCompatActivity
         } else if (id == R.id.nav_add_offence) {
             fragment = new AddOffenceFragment();
             s = "offence";
+            m = new Motorist();
             getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else if (id == R.id.nav_offence_history) {
 
@@ -364,4 +365,74 @@ public class DashBoardActivity extends AppCompatActivity
         alertDialog.show();
     }
 
+    public void loginFirebase(){
+
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            Log.d("app", "signInAnonymously:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String s = FirebaseInstanceId.getInstance().getToken();
+                            updateFirebase(s);
+
+                          //  Toast.makeText(DashBoardActivity.this, s, Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("app", "signInAnonymously:failure", task.getException());
+                            //   Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    }
+                });
+
+    }
+
+    void updateFirebase(String token) {
+
+
+        firebase_call = authService.firebase(token);
+
+
+        firebase_call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String>  firebase_call, Response<String> response) {
+
+                Log.w(TAG, "onResponse: " + response);
+
+                if (response.isSuccessful()) {
+
+                        //Toast.makeText(DashBoardActivity.this,"Saved", Toast.LENGTH_LONG).show();
+
+                } else {
+                    if (response.code() == 422) {
+
+
+                      //  Toast.makeText(DashBoardActivity.this, "Invalid", Toast.LENGTH_LONG).show();
+
+                    }
+                    if (response.code() == 401) {
+                        ApiError apiError = Utils.convertErrors(response.errorBody());
+
+                       // Toast.makeText(DashBoardActivity.this, apiError.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<String>  firebase_call, Throwable t) {
+                Log.w(TAG, "onFailure: " + t.getMessage());
+
+            }
+        });
+
+
+    }
 }

@@ -68,29 +68,9 @@ public class MainActivity extends AppCompatActivity {
         progressView = (GeometricProgressView) findViewById(R.id.progressView);
 
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
+        //loginFirebase();
 
-
-        mAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                            Log.d("app", "signInAnonymously:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                          //  Toast.makeText(MainActivity.this, user.getUid(), Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("app", "signInAnonymously:failure", task.getException());
-                         //   Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-
-                        }
-
-
-                    }
-                });
 
         if (loginManager.getLogin().getUsername() != null) {
             mUsernameField.setVisibility(View.GONE);

@@ -7,6 +7,7 @@ package com.madushanka.imotoristofficer.network;
 import com.madushanka.imotoristofficer.entities.AccessToken;
 import com.madushanka.imotoristofficer.entities.Motorist;
 import com.madushanka.imotoristofficer.entities.Offence;
+import com.madushanka.imotoristofficer.entities.Ticket;
 import com.madushanka.imotoristofficer.entities.User;
 
 import java.util.List;
@@ -38,6 +39,10 @@ public interface ApiService {
     @GET("offences")
     Call<List<Offence>> offences();
 
+    @POST("register-firebase")
+    @FormUrlEncoded
+    Call<String> firebase(@Field("firebase_token") String firebase_token);
+
     @POST("get-user")
     @FormUrlEncoded
     Call<Motorist> motorist(@Field("license_no") String license_no);
@@ -45,6 +50,20 @@ public interface ApiService {
     @POST("refresh")
     @FormUrlEncoded
     Call<AccessToken> refresh(@Field("refresh_token") String refreshToken);
+
+    @POST("store-ticket")
+    @FormUrlEncoded
+    Call<Ticket> issueTicket
+            (
+                    @Field("license_no") String license_no,
+                    @Field("vehicle_no") String vehicle_no,
+                    @Field("lat") String lat,
+                    @Field("lng") String lng,
+                    @Field("location") String location,
+                    @Field("remarks") String remarks,
+                    @Field("offences[]") List<String> offences
+
+             );
 
 
 }
