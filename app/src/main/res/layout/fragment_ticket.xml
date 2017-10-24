@@ -12,68 +12,43 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="15dp"
+            android:layout_margin="5dp"
             android:alpha="0.9"
-            android:background="@android:color/transparent"
+            android:background="@color/bg_register"
             android:gravity="top"
             android:orientation="vertical"
             android:weightSum="1">
-
 
             <TextView
                 android:id="@+id/offence_summary_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_weight="0.16"
+                android:layout_weight="0.03"
                 android:textSize="18sp"
                 android:fontFamily="sans-serif"
-                android:gravity="left"
+                android:gravity="center_horizontal"
                 android:layout_marginLeft="10dp"
-                android:text="Ticket Summary"
+                android:text="Ticket Details"
                 android:textStyle="bold"
                 android:textColor="@color/bg" />
 
-            <TextView
-                android:id="@+id/offence_summary"
+
+            <WebView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="0.30"
-                android:fontFamily="sans-serif"
-                android:text=""
-                android:textSize="15sp"
-                android:textColor="@android:color/white" />
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:id="@+id/webView"
+                android:layout_weight="0.94" />
 
             <info.hoang8f.widget.FButton
-                android:id="@+id/view_offence_list"
+                android:id="@+id/ticket_print"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:text="Offence List"
-                android:textColor="@android:color/white"
-                fbutton:buttonColor="@color/fbutton_color_asbestos"
-                fbutton:shadowEnabled="false" />
-
-            <info.hoang8f.widget.FButton
-                android:id="@+id/add_remark"
-                android:layout_width="194dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:text="Add Remark"
-                android:textColor="@android:color/white"
-                fbutton:buttonColor="@color/fbutton_color_asbestos"
-                fbutton:shadowEnabled="false" />
-
-            <info.hoang8f.widget.FButton
-                android:id="@+id/add_offence_confirm"
-                android:layout_width="194dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:text="Confirm Ticket"
+                android:layout_margin="15dp"
+                android:text="Print Ticket"
                 android:textColor="@android:color/white"
                 fbutton:buttonColor="@color/fbutton_color_turquoise"
                 fbutton:shadowEnabled="false" />
@@ -81,10 +56,10 @@
 
             <net.bohush.geometricprogressview.GeometricProgressView
                 android:id="@+id/progressView"
-                android:layout_width="34dp"
-                android:layout_height="39dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:visibility="gone"
                 app:gp_figure_padding="2dp"
                 app:gp_number_of_angles="15" />

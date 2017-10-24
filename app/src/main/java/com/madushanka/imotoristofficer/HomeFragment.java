@@ -46,6 +46,22 @@ public class HomeFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        offenceHistoryButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+                Fragment  fragment = new TicketListFragment();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                getActivity().getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                ft.replace(R.id.main_view, fragment,"all_ticket");
+                ft.addToBackStack("all_ticket");
+                ft.commit();
+            }
+        });
+
+
         mapButton.setOnClickListener(new View.OnClickListener()
         {
             @Override

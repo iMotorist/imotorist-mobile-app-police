@@ -21,6 +21,9 @@ public class Motorist {
     String location_lat;
     String location_lon;
     String remark;
+    Ticket ticket;
+    String firebase_token;
+
 
     public String getId() {
         return id;
@@ -124,5 +127,21 @@ public class Motorist {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    public String getFirebase_token() {
+        return firebase_token;
+    }
+
+    public void setFirebase_token(String firebase_token) {
+        this.firebase_token = firebase_token;
     }
 }

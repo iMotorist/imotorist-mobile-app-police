@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Imotorist Officer</string>
+    <string name="app_name">iMotorist</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">iMotorist</string>
 
     <string name="menu_1">Add Offence</string>
     <string name="menu_2">Offence History</string>

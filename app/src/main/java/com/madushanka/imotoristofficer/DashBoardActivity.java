@@ -34,8 +34,15 @@ import com.madushanka.imotoristofficer.entities.ApiError;
 import com.madushanka.imotoristofficer.entities.Motorist;
 import com.madushanka.imotoristofficer.entities.User;
 import com.madushanka.imotoristofficer.network.ApiService;
+import com.madushanka.imotoristofficer.network.PushNotification;
 import com.madushanka.imotoristofficer.network.RetrofitBuilder;
 import net.bohush.geometricprogressview.GeometricProgressView;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.HashMap;
+
 import pugman.com.simplelocationgetter.SimpleLocationGetter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,10 +125,21 @@ public class DashBoardActivity extends AppCompatActivity
 
         } else {
 
-            final Fragment fragment=getSupportFragmentManager().findFragmentByTag("home");
+            final Fragment homefragment=getSupportFragmentManager().findFragmentByTag("home");
+            final Fragment ticketfragment=getSupportFragmentManager().findFragmentByTag("ticket");
 
-            if(fragment != null && fragment.isVisible()){
+            if(homefragment != null && homefragment.isVisible()){
                 super.onBackPressed();
+            }
+
+            else if(ticketfragment != null && ticketfragment.isVisible()){
+
+                fragment = new HomeFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                ft.replace(R.id.main_view, fragment);
+                ft.addToBackStack("home");
+                ft.commit();
             }
 
             getFragmentManager().popBackStack();
@@ -153,6 +171,9 @@ public class DashBoardActivity extends AppCompatActivity
             m = new Motorist();
             getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         } else if (id == R.id.nav_offence_history) {
+            fragment = new TicketListFragment();
+            s = "ticket_all";
+            getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         } else if (id == R.id.nav_notifications) {
 
@@ -378,7 +399,7 @@ public class DashBoardActivity extends AppCompatActivity
                             String s = FirebaseInstanceId.getInstance().getToken();
                             updateFirebase(s);
 
-                          //  Toast.makeText(DashBoardActivity.this, s, Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(DashBoardActivity.this, s, Toast.LENGTH_SHORT).show();
 
                         } else {
                             // If sign in fails, display a message to the user.

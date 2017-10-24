@@ -2,6 +2,8 @@ package com.madushanka.imotoristofficer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,7 @@ public class AddOffenceCompleteFragment extends Fragment {
     Call<Ticket> ticket_call;
     ApiService authService;
     TokenManager tokenManager;
+    Ticket t;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -169,6 +172,8 @@ public class AddOffenceCompleteFragment extends Fragment {
 
     void saveTicket() {
 
+        issue_ticket.setVisibility(View.GONE);
+        progressView.setVisibility(View.VISIBLE);
 
         Motorist m = DashBoardActivity.m;
 
@@ -190,9 +195,14 @@ public class AddOffenceCompleteFragment extends Fragment {
 
                 if (response.isSuccessful()) {
 
-                    Toast.makeText(getActivity(),response.body().getMotorist_vehicle_classes().get(0), Toast.LENGTH_LONG).show();
+
+                   // Toast.makeText(getActivity(),response.body().getId(), Toast.LENGTH_LONG).show();
+                    DashBoardActivity.m.setTicket(response.body());
+                    showTicket(response.body());
 
                 } else {
+                    issue_ticket.setVisibility(View.VISIBLE);
+                    progressView.setVisibility(View.GONE);
                     if (response.code() == 422) {
 
 
@@ -212,10 +222,23 @@ public class AddOffenceCompleteFragment extends Fragment {
             @Override
             public void onFailure(Call<Ticket>  ticket_call, Throwable t) {
                 Log.w(TAG, "onFailure: " + t.getMessage());
-
+                issue_ticket.setVisibility(View.VISIBLE);
+                progressView.setVisibility(View.GONE);
             }
         });
 
+
+    }
+
+    public void showTicket(Ticket t){
+
+        TicketFragment  fragment = new TicketFragment();
+        fragment.setT(t);
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.main_view, fragment,"ticket");
+        ft.addToBackStack("ticket");
+        ft.commit();
+       // getActivity().getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
     }
 }

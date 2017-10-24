@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
-        android:text="Finish"
+        android:text="Next"
         android:textColor="@android:color/white"
         fbutton:buttonColor="@color/fbutton_color_turquoise"
         fbutton:shadowEnabled="false" />

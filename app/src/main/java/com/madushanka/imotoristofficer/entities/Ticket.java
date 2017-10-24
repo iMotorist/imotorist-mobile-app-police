@@ -25,7 +25,10 @@ public class Ticket {
             valid_to,
             court_name,
             ourt_date,
-            remarks;
+            remarks,
+            license_no,
+            ticket_no;
+
     List<Offence> offences;
     List<String> motorist_vehicle_classes;
     boolean paid;
@@ -199,6 +202,22 @@ public class Ticket {
 
     public void setMotorist_vehicle_classes(List<String> motorist_vehicle_classes) {
         this.motorist_vehicle_classes = motorist_vehicle_classes;
+    }
+
+    public String getVlicense_no() {
+        return license_no;
+    }
+
+    public void setVlicense_no(String vlicense_no) {
+        this.license_no = vlicense_no;
+    }
+
+    public String getTicket_no() {
+        return ticket_no;
+    }
+
+    public void setTicket_no(String ticket_no) {
+        this.ticket_no = ticket_no;
     }
 }
 

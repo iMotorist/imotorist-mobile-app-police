@@ -36,10 +36,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private SparseBooleanArray mSelectedItemsIds;
 
 
-    public RecyclerViewAdapter(Context context, List<Offence> arrayList) {
+    public RecyclerViewAdapter(Context context, List<Offence> arrayList,SparseBooleanArray sparseBooleanArray) {
         this.arrayList = arrayList;
         this.context = context;
-        mSelectedItemsIds = new SparseBooleanArray();
+
+        if(sparseBooleanArray == null) {
+            mSelectedItemsIds = new SparseBooleanArray();
+        }
+        else{
+            mSelectedItemsIds = sparseBooleanArray;
+        }
     }
 
     @Override

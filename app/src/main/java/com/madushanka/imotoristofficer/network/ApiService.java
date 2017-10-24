@@ -39,6 +39,9 @@ public interface ApiService {
     @GET("offences")
     Call<List<Offence>> offences();
 
+    @GET("get-officer-ticket")
+    Call<List<Ticket>> getAllTickets();
+
     @POST("register-firebase")
     @FormUrlEncoded
     Call<String> firebase(@Field("firebase_token") String firebase_token);
